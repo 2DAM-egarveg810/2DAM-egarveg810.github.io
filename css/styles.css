@@ -513,3 +513,81 @@
   height: 40px; /* ajusta según tu logo */
   width: auto;
 }
+
+
+
+
+
+.nosotros {
+  max-width: 1000px;
+  margin: 3em auto;
+  padding: 2em;
+  background-color: #4A423D;
+  color: #E7E2D1;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(166, 124, 82, 0.25);
+  animation: shadowPulse 4s ease-in-out infinite;
+}
+
+.nosotros h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid #D4B483;
+  padding-bottom: 0.3em;
+  color: #D4B483;
+}
+
+.nosotros p {
+  font-size: 1.2em;
+  line-height: 1.6em;
+  margin-bottom: 2em;
+  color: #DAD2C8;
+}
+
+.equipo {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5em;
+  flex-wrap: wrap;
+}
+
+.miembro {
+  flex: 1 1 30%;
+  background-color: #3E3A36;
+  padding: 1em;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.miembro img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 1em;
+  border: 3px solid #A67C52;
+}
+
+.miembro h3 {
+  color: #D4B483;
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+
+.miembro p {
+  font-size: 1em;
+  color: #C8C1B3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .equipo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .miembro {
+    max-width: 90%;
+  }
+}
