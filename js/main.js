@@ -2,40 +2,40 @@
 
 // Menú hamburguesa
 document.getElementById('menu-toggle').addEventListener('click', () => {
-    document.getElementById('nav-menu').classList.toggle('active');
-  });
+	document.getElementById('nav-menu').classList.toggle('active');
+});
+
+const nombres = [
+'Ana', 'Luis', 'Marta', 'Pedro', 'Laura',
+'Carlos', 'Paula', 'Jorge', 'Lucía', 'Iván',
+'Sofía', 'Alberto', 'Carmen', 'Diego', 'Isabel',
+'Fernando', 'Elena', 'David', 'María', 'Manuel',
+'Patricia', 'Raúl', 'Sandra', 'Javier', 'Verónica',
+'Andrés', 'Natalia', 'Rubén', 'Beatriz', 'Sergio',
+'Irene', 'Antonio', 'Mercedes', 'Alba', 'Óscar',
+'Mónica', 'Juan', 'Cristina', 'Miguel', 'Carla',
+'Eduardo', 'Silvia', 'Pablo', 'Teresa', 'Hugo',
+'Rosa', 'Francisco', 'Natalia', 'Samuel', 'Marta',
+'Marcos', 'Inés', 'Víctor', 'Paula', 'Raquel',
+'Diego', 'Lorena', 'Óliver', 'Nuria', 'Joaquín',
+'Sara', 'Alfredo', 'Noelia', 'Enrique', 'Alicia',
+'Rubén', 'Celia', 'Esteban', 'Verónica', 'David',
+'Elisa', 'Mario', 'Claudia', 'Ignacio', 'Ángela'
+];
   
-  const nombres = [
-    'Ana', 'Luis', 'Marta', 'Pedro', 'Laura',
-    'Carlos', 'Paula', 'Jorge', 'Lucía', 'Iván',
-    'Sofía', 'Alberto', 'Carmen', 'Diego', 'Isabel',
-    'Fernando', 'Elena', 'David', 'María', 'Manuel',
-    'Patricia', 'Raúl', 'Sandra', 'Javier', 'Verónica',
-    'Andrés', 'Natalia', 'Rubén', 'Beatriz', 'Sergio',
-    'Irene', 'Antonio', 'Mercedes', 'Alba', 'Óscar',
-    'Mónica', 'Juan', 'Cristina', 'Miguel', 'Carla',
-    'Eduardo', 'Silvia', 'Pablo', 'Teresa', 'Hugo',
-    'Rosa', 'Francisco', 'Natalia', 'Samuel', 'Marta',
-    'Marcos', 'Inés', 'Víctor', 'Paula', 'Raquel',
-    'Diego', 'Lorena', 'Óliver', 'Nuria', 'Joaquín',
-    'Sara', 'Alfredo', 'Noelia', 'Enrique', 'Alicia',
-    'Rubén', 'Celia', 'Esteban', 'Verónica', 'David',
-    'Elisa', 'Mario', 'Claudia', 'Ignacio', 'Ángela'
-  ];
-  
-  
-  const productosTech = [
-    { singular: 'Pan de código', plural: 'Panes de código' },
-    { singular: 'Croissant binario', plural: 'Croissants binarios' },
-    { singular: 'Tarta digital', plural: 'Tartas digitales' },
-    { singular: 'Bollo de bits', plural: 'Bollos de bits' },
-    { singular: 'Bizcocho en la nube', plural: 'Bizcochos en la nube' },
-    { singular: 'Napolitana cacheada', plural: 'Napolitanas cacheadas' },
-    { singular: 'Baguette de algoritmo', plural: 'Baguettes de algoritmo' },
-    { singular: 'Rosquilla de bytes', plural: 'Rosquillas de bytes' },
-    { singular: 'Galleta firewall', plural: 'Galletas firewall' },
-    { singular: 'Pan integral cifrado', plural: 'Panes integrales cifrados' }
-  ];
+
+const productosTech = [
+	{ singular: 'Pan de código', plural: 'Panes de código' },
+	{ singular: 'Croissant binario', plural: 'Croissants binarios' },
+	{ singular: 'Tarta digital', plural: 'Tartas digitales' },
+	{ singular: 'Bollo de bits', plural: 'Bollos de bits' },
+	{ singular: 'Bizcocho en la nube', plural: 'Bizcochos en la nube' },
+	{ singular: 'Napolitana cacheada', plural: 'Napolitanas cacheadas' },
+	{ singular: 'Baguette de algoritmo', plural: 'Baguettes de algoritmo' },
+	{ singular: 'Rosquilla de bytes', plural: 'Rosquillas de bytes' },
+	{ singular: 'Galleta firewall', plural: 'Galletas firewall' },
+	{ singular: 'Pan integral cifrado', plural: 'Panes integrales cifrados' }
+];
   
   
   
@@ -144,69 +144,3 @@ btnVaciar.addEventListener('click', () => {
     const carrito = document.querySelector('.carrito-lateral');
     carrito.classList.toggle('visible');
   }
-
-  (() => {
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-  
-    // Ajustamos tamaño
-    let w, h;
-    function resize() {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-  
-    // Letras que caen (puedes cambiar o ampliar)
-    const letters = (
-        'あいうえおかきくけこさしすせそたちつてとなにぬねの' +  // hiragana
-        'アイウエオカキクケコサシスセソタチツテトナニヌネノ' +  // katakana
-        '0123456789'
-      ).split('');
-  
-    // Paleta de colores pastel oscuros
-    const colors = [
-        '#C4A484', // marrón claro topo
-        '#7E5E3B', // marrón medio
-        '#5B3A29', // marrón oscuro
-        '#A67B5B', // marrón caramelo
-        '#D2B48C'  // marrón arena claro
-      ];
-    // Columnas
-    const fontSize = 16;
-    const columns = Math.floor(w / fontSize);
-  
-    // Posición vertical de cada columna
-    const drops = Array(columns).fill(0);
-  
-    function draw() {
-      // Fondo semitransparente para efecto estela
-      ctx.fillStyle = 'rgba(18,18,18, 0.1)';
-      ctx.fillRect(0, 0, w, h);
-  
-      ctx.font = fontSize + 'px monospace';
-  
-      for(let i = 0; i < columns; i++) {
-        // Elegimos letra y color aleatorio para esta columna y posición
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        ctx.fillStyle = color;
-  
-        // Dibujar letra
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-  
-        // Reincio aleatorio para caída infinita
-        if(drops[i] * fontSize > h && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-  
-    setInterval(draw, 50);
-  })();
-
-  

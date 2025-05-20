@@ -14,7 +14,7 @@
     height: 100vh;
     z-index: 0;
   }
-  
+
   /* Contenedor principal con z-index superior */
   .contenedor {
     position: relative;
