@@ -98,6 +98,7 @@ btnCarrito.addEventListener('click', () => {
       btnCarrito.style.right = '20px'; // Vuelve a la esquina derecha
     }
   });
+
 function actualizarCarrito() {
   listaCarrito.innerHTML = '';
 
@@ -119,6 +120,8 @@ function actualizarCarrito() {
   totalCarrito.textContent = total.toFixed(2);
 }
 
+let cookieClick = 0;
+
 botonesAgregar.forEach(boton => {
   boton.addEventListener('click', () => {
     const nombre = boton.getAttribute('data-nombre');
@@ -130,14 +133,30 @@ botonesAgregar.forEach(boton => {
       carrito[nombre] = { nombre, precio, cantidad: 1 };
     }
 
+    if(nombre === 'Galleta firewall'){
+      cookieClick++;
+      if(cookieClick === 20){
+        boton.textContent = 'Cookie Clicker';
+      }
+      if(cookieClick === 50){
+        boton.textContent = 'Se viene sindrome del tunel carpiano';
+      }
+    }
+
     actualizarCarrito();
   });
 });
 
+
+
+
 btnVaciar.addEventListener('click', () => {
   carrito = {};
+  
   actualizarCarrito();
 });
+
+
   
 
   function toggleCarrito() {
