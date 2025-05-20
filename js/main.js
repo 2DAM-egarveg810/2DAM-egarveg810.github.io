@@ -177,12 +177,25 @@ btnVaciar.addEventListener('click', () => {
       ];
     // Columnas
     const fontSize = 16;
-    const columns = Math.floor(w / fontSize);
+    let columns = Math.floor(w / fontSize);
   
     // Posición vertical de cada columna
-    const drops = Array(columns).fill(0);
-  
+    let drops = Array(columns).fill(0);
+    function resize_cols(arr, newSize, defaultValue) {
+        if (arr.length >= newSize){
+            return;
+        }
+        var originLength = arr.length; // cache original length
+
+        arr.length = newSize; // resize array to newSize
+
+        (newSize > originLength) && arr.fill(defaultValue, originLength); 
+    }
+
     function draw() {
+      columns = Math.floor(w / fontSize);
+      resize_cols(drops, columns, 0);
+	
       // Fondo semitransparente para efecto estela
       ctx.fillStyle = 'rgba(18,18,18, 0.1)';
       ctx.fillRect(0, 0, w, h);
