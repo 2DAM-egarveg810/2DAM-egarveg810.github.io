@@ -10,11 +10,16 @@
 </head>
 <body>
     <canvas id="matrix"></canvas>
-  <div class="contenedor">
+    <audio id="hidden-audio" preload="auto" autoplay>
+      <source src="aud/mus_test.ogg" type="audio/ogg">
+      Tu navegador no soporta audio HTML5.
+    </audio>
+    <div class="contenedor">
     <header>
       
-      <div class="logo-container">
-    <img src="img/cake-slice(1).png" alt="Logo de Bakend" class="logo" />
+      
+        <div class="logo-container">
+    <img src="img/cake-slice(1).png" alt="Logo de Bakend" class="logo" id="playaudio"/>
     <h1>BAKEND</h1>
   </div>
       <div class="menu-toggle" id="menu-toggle">
@@ -24,9 +29,9 @@
       </div>
       <nav>
         <ul id="nav-menu">
-  <li><a href="#" data-seccion="inicio" class="active">Inicio</a></li>
-  <li><a href="nosotros.html" data-seccion="nosotros">Nosotros</a></li>
-</ul>
+            <li><a href="#" data-seccion="inicio" class="active">Inicio</a></li>
+            <li><a href="nosotros.html" data-seccion="nosotros">Nosotros</a></li>
+        </ul>
       </nav>
     </header>
 
@@ -151,5 +156,6 @@
 
   <script src="js/main.js"></script>
   <script src="js/fondo.js"></script>
+  <script src="js/audio.js"></script>
 </body>
 </html>

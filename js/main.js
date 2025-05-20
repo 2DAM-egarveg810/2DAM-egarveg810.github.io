@@ -2,40 +2,40 @@
 
 // Menú hamburguesa
 document.getElementById('menu-toggle').addEventListener('click', () => {
-    document.getElementById('nav-menu').classList.toggle('active');
-  });
+	document.getElementById('nav-menu').classList.toggle('active');
+});
+
+const nombres = [
+'Ana', 'Luis', 'Marta', 'Pedro', 'Laura',
+'Carlos', 'Paula', 'Jorge', 'Lucía', 'Iván',
+'Sofía', 'Alberto', 'Carmen', 'Diego', 'Isabel',
+'Fernando', 'Elena', 'David', 'María', 'Manuel',
+'Patricia', 'Raúl', 'Sandra', 'Javier', 'Verónica',
+'Andrés', 'Natalia', 'Rubén', 'Beatriz', 'Sergio',
+'Irene', 'Antonio', 'Mercedes', 'Alba', 'Óscar',
+'Mónica', 'Juan', 'Cristina', 'Miguel', 'Carla',
+'Eduardo', 'Silvia', 'Pablo', 'Teresa', 'Hugo',
+'Rosa', 'Francisco', 'Natalia', 'Samuel', 'Marta',
+'Marcos', 'Inés', 'Víctor', 'Paula', 'Raquel',
+'Diego', 'Lorena', 'Óliver', 'Nuria', 'Joaquín',
+'Sara', 'Alfredo', 'Noelia', 'Enrique', 'Alicia',
+'Rubén', 'Celia', 'Esteban', 'Verónica', 'David',
+'Elisa', 'Mario', 'Claudia', 'Ignacio', 'Ángela'
+];
   
-  const nombres = [
-    'Ana', 'Luis', 'Marta', 'Pedro', 'Laura',
-    'Carlos', 'Paula', 'Jorge', 'Lucía', 'Iván',
-    'Sofía', 'Alberto', 'Carmen', 'Diego', 'Isabel',
-    'Fernando', 'Elena', 'David', 'María', 'Manuel',
-    'Patricia', 'Raúl', 'Sandra', 'Javier', 'Verónica',
-    'Andrés', 'Natalia', 'Rubén', 'Beatriz', 'Sergio',
-    'Irene', 'Antonio', 'Mercedes', 'Alba', 'Óscar',
-    'Mónica', 'Juan', 'Cristina', 'Miguel', 'Carla',
-    'Eduardo', 'Silvia', 'Pablo', 'Teresa', 'Hugo',
-    'Rosa', 'Francisco', 'Natalia', 'Samuel', 'Marta',
-    'Marcos', 'Inés', 'Víctor', 'Paula', 'Raquel',
-    'Diego', 'Lorena', 'Óliver', 'Nuria', 'Joaquín',
-    'Sara', 'Alfredo', 'Noelia', 'Enrique', 'Alicia',
-    'Rubén', 'Celia', 'Esteban', 'Verónica', 'David',
-    'Elisa', 'Mario', 'Claudia', 'Ignacio', 'Ángela'
-  ];
-  
-  
-  const productosTech = [
-    { singular: 'Pan de código', plural: 'Panes de código' },
-    { singular: 'Croissant binario', plural: 'Croissants binarios' },
-    { singular: 'Tarta digital', plural: 'Tartas digitales' },
-    { singular: 'Bollo de bits', plural: 'Bollos de bits' },
-    { singular: 'Bizcocho en la nube', plural: 'Bizcochos en la nube' },
-    { singular: 'Napolitana cacheada', plural: 'Napolitanas cacheadas' },
-    { singular: 'Baguette de algoritmo', plural: 'Baguettes de algoritmo' },
-    { singular: 'Rosquilla de bytes', plural: 'Rosquillas de bytes' },
-    { singular: 'Galleta firewall', plural: 'Galletas firewall' },
-    { singular: 'Pan integral cifrado', plural: 'Panes integrales cifrados' }
-  ];
+
+const productosTech = [
+	{ singular: 'Pan de código', plural: 'Panes de código' },
+	{ singular: 'Croissant binario', plural: 'Croissants binarios' },
+	{ singular: 'Tarta digital', plural: 'Tartas digitales' },
+	{ singular: 'Bollo de bits', plural: 'Bollos de bits' },
+	{ singular: 'Bizcocho en la nube', plural: 'Bizcochos en la nube' },
+	{ singular: 'Napolitana cacheada', plural: 'Napolitanas cacheadas' },
+	{ singular: 'Baguette de algoritmo', plural: 'Baguettes de algoritmo' },
+	{ singular: 'Rosquilla de bytes', plural: 'Rosquillas de bytes' },
+	{ singular: 'Galleta firewall', plural: 'Galletas firewall' },
+	{ singular: 'Pan integral cifrado', plural: 'Panes integrales cifrados' }
+];
   
   
   
