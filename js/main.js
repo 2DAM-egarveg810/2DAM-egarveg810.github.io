@@ -172,4 +172,6 @@ let secret = '';
     window.location.href = 'https://orteil.dashnet.org/cookieclicker/';
     secret = ''; // reset
   }
+
+  
 });
