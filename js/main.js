@@ -137,6 +137,7 @@ botonesAgregar.forEach(boton => {
       cookieClick++;
       if(cookieClick === 20){
         boton.textContent = 'Cookie Clicker';
+        document.title = 'Cookie Clicker';
       }
       if(cookieClick === 50){
         boton.textContent = 'Se viene sindrome del tunel carpiano';
@@ -163,3 +164,12 @@ btnVaciar.addEventListener('click', () => {
     const carrito = document.querySelector('.carrito-lateral');
     carrito.classList.toggle('visible');
   }
+  
+let secret = '';
+  document.addEventListener('keydown', e => {
+  secret += e.key.toLowerCase();
+  if(secret.includes('galleta')) {
+    window.location.href = 'https://orteil.dashnet.org/cookieclicker/';
+    secret = ''; // reset
+  }
+});
