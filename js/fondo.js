@@ -29,6 +29,29 @@
         '#A67B5B', // marrón caramelo
         '#D2B48C'  // marrón arena claro
       ];
+
+      const colorsChef = [
+        '#FF69B4', // rosa chicle
+        '#FFD700', // amarillo dorado (tipo pastel de cumpleaños)
+        '#00FFFF', // cian eléctrico
+        '#FF4500', // naranja intenso (glaseado loco)
+        '#8A2BE2', // púrpura brillante
+        '#00FF00', // verde neón
+        '#FF1493', // rosa fuerte (tipo frosting)
+        '#1E90FF', // azul brillante
+        '#FF6347', // rojo tomate (pero saturado)
+        '#9400D3'  // violeta intenso // marrón arena claro
+      ];
+
+    let chefmode = false;
+    let chefCont = 0;
+
+    document.getElementById('playaudio').addEventListener('click', () => {
+    chefCont++;
+    if(chefCont >=10){
+      chefmode = true;
+    }
+});
     // Columnas
     const fontSize = 16;
     let columns = Math.floor(w / fontSize);
@@ -59,7 +82,14 @@
       for(let i = 0; i < columns; i++) {
         // Elegimos letra y color aleatorio para esta columna y posición
         const text = letters[Math.floor(Math.random() * letters.length)];
-        const color = colors[Math.floor(Math.random() * colors.length)];
+        let color;
+        if (!chefmode){
+          color = colors[Math.floor(Math.random() * colors.length)];
+        }else{
+          color = colorsChef[Math.floor(Math.random() * colors.length)];
+        }
+        
+      
         ctx.fillStyle = color;
   
         // Dibujar letra
@@ -76,4 +106,3 @@
     setInterval(draw, 50);
   })();
 
-  
