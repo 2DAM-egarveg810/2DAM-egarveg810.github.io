@@ -503,4 +503,13 @@
     }
   }
 
-  
+  .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.logo {
+  height: 40px; /* ajusta según tu logo */
+  width: auto;
+}
