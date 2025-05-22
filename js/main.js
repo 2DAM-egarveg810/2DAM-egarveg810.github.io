@@ -84,20 +84,25 @@ const btnCarrito = document.getElementById('btn-carrito');
 const listaCarrito = document.getElementById('lista-carrito');
 const totalCarrito = document.getElementById('total-carrito');
 const btnVaciar = document.getElementById('vaciar-carrito');
+const btnComprar = document.getElementById('comprar-carrito');
 const botonesAgregar = document.querySelectorAll('.boton-agregar');
+
+function abrirCarrito(){
+  carritoLateral.classList.toggle('abierto');
+  
+  if (carritoLateral.classList.contains('abierto')) {
+    btnCarrito.textContent = '✖';
+    btnCarrito.style.right = '320px'; // Se mueve hacia la izquierda del carrito
+  } else {
+    btnCarrito.textContent = '🛒';
+    btnCarrito.style.right = '20px'; // Vuelve a la esquina derecha
+  }
+}
 
 let carrito = {};
 btnCarrito.addEventListener('click', () => {
-    carritoLateral.classList.toggle('abierto');
-  
-    if (carritoLateral.classList.contains('abierto')) {
-      btnCarrito.textContent = '✖';
-      btnCarrito.style.right = '320px'; // Se mueve hacia la izquierda del carrito
-    } else {
-      btnCarrito.textContent = '🛒';
-      btnCarrito.style.right = '20px'; // Vuelve a la esquina derecha
-    }
-  });
+    abrirCarrito();
+});
 
 function actualizarCarrito() {
   listaCarrito.innerHTML = '';
@@ -145,6 +150,9 @@ botonesAgregar.forEach(boton => {
     }
 
     actualizarCarrito();
+    if (!carritoLateral.classList.contains('abierto')){
+      abrirCarrito();
+    }
   });
 });
 
@@ -153,11 +161,32 @@ botonesAgregar.forEach(boton => {
 
 btnVaciar.addEventListener('click', () => {
   carrito = {};
-  
   actualizarCarrito();
 });
 
-
+btnComprar.addEventListener('click', () => {
+  /*carrito.forEach(element => {
+    const nombre = element.getAttribute('data-nombre');
+    let entrada = `Cliente: Tu compraste 5 ${nombre} en tu casa`;
+    const li = document.createElement('li');
+    li.textContent = entrada;
+    logList.appendChild(li);
+    // Scroll automático hacia abajo
+    logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
+  });*/
+  for (const [key, value] of Object.entries(carrito)) {
+    //console.log(key, value);
+    let entrada = `Cliente: Tu compraste ${value.cantidad} ${value.nombre} en tu casa`;
+    const li = document.createElement('li');
+    li.textContent = entrada;
+    logList.appendChild(li);
+    // Scroll automático hacia abajo
+    logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
+  }
+  
+  carrito = {};
+  actualizarCarrito();
+});
   
 
   function toggleCarrito() {

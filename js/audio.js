@@ -6,14 +6,19 @@ audio.play().catch(e => {
 
 let playing = false;
 
-document.getElementById('playaudio').addEventListener('mouseover', () => {
+function cambiaIcono(){
     if (!playing){
         document.getElementById('playaudio').src = "img/play-button.png";
     }else{
         document.getElementById('playaudio').src = "img/pause-button.png";
     }
+}
+
+document.getElementById('playaudio').addEventListener('mouseover', () => {
+    cambiaIcono();
    
 });
+
 document.getElementById('playaudio').addEventListener('mouseleave', () => {
     document.getElementById('playaudio').src = "img/cake-slice(1).png";
 });
@@ -29,4 +34,5 @@ document.getElementById('playaudio').addEventListener('click', () => {
         audio.currentTime = 0;
     }
     playing = !playing;
+    cambiaIcono();
 });
