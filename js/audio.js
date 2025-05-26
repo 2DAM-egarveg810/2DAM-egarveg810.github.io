@@ -20,7 +20,7 @@ document.getElementById('playaudio').addEventListener('mouseover', () => {
 });
 
 document.getElementById('playaudio').addEventListener('mouseleave', () => {
-    document.getElementById('playaudio').src = "img/cake-slice(1).png";
+    document.getElementById('playaudio').src = "img/iconitofresh.png";
 });
 
 document.getElementById('playaudio').addEventListener('click', () => {

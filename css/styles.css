@@ -24,7 +24,7 @@ body,
 html {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    
     min-height: 100vh;
     background: #121212;
     /* transparente para que el canvas se vea */

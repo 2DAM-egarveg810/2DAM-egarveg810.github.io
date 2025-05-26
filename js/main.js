@@ -94,6 +94,7 @@ const btnVaciar = document.getElementById("vaciar-carrito");
 const btnComprar = document.getElementById("comprar-carrito");
 const botonesAgregar = document.querySelectorAll(".boton-agregar");
 
+
 function abrirCarrito() {
     carritoLateral.classList.toggle("abierto");
 
