@@ -164,19 +164,19 @@ botonesAgregar.forEach((boton) => {
         }
 
         if (nombre === "Galleta firewall") {
-        cookieClick++;
-        if (cookieClick === 20) {
-            boton.textContent = "Cookie Clicker";
-            document.title = "Cookie Clicker";
-        }
-        if (cookieClick === 50) {
-            boton.textContent = "Se viene sindrome del tunel carpiano";
-        }
+            cookieClick++;
+            if (cookieClick === 20) {
+                boton.textContent = "Cookie Clicker";
+                document.title = "Cookie Clicker";
+            }
+            if (cookieClick === 50) {
+                boton.textContent = "Se viene sindrome del tunel carpiano";
+            }
         }
 
         actualizarCarrito();
         if (!carritoLateral.classList.contains("abierto")) {
-        abrirCarrito();
+            abrirCarrito();
         }
     });
 });
@@ -188,12 +188,12 @@ btnVaciar.addEventListener("click", () => {
 
 btnComprar.addEventListener("click", () => {
     for (const [key, value] of Object.entries(carrito)) {
-      let entrada = `Cliente: Compraste ${value.cantidad} ${value.nombre} en tu casa`;
-      const li = document.createElement("li");
-      li.textContent = entrada;
-      logList.appendChild(li);
-      // Scroll automático hacia abajo
-      logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
+        let entrada = `Cliente: Compraste ${value.cantidad} ${value.nombre} en tu casa`;
+        const li = document.createElement("li");
+        li.textContent = entrada;
+        logList.appendChild(li);
+        // Scroll automático hacia abajo
+        logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
     }
 
     carrito = {};
@@ -210,7 +210,7 @@ let secret = "";
 document.addEventListener("keydown", (e) => {
     secret += e.key.toLowerCase();
     if (secret.includes("galleta")) {
-      window.location.href = "https://orteil.dashnet.org/cookieclicker/";
-      secret = ""; // reset
+        window.location.href = "https://orteil.dashnet.org/cookieclicker/";
+        secret = ""; // reset
     }
 });
