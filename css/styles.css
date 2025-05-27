@@ -245,7 +245,7 @@ nav a.active {
 
 
 /* Log de compras */
-.log-compras {
+.log-compras, .chatbot-log {
     padding: 2em 1.5em;
     max-width: 800px;
     margin: 2em auto 4em;
@@ -256,7 +256,7 @@ nav a.active {
     color: #BFB6A9;
 }
 
-.log-compras h2 {
+.log-compras h2, .chatbot-log h2 {
     margin-bottom: 1em;
     font-size: 1.6em;
     font-weight: 700;
@@ -265,7 +265,7 @@ nav a.active {
     color: #D4B483;
 }
 
-.log-container {
+.log-container, .chatbot-container {
     height: 300px;
     overflow-y: auto;
     background-color: #2E2B27;
@@ -276,13 +276,13 @@ nav a.active {
     color: #E7E2D1;
 }
 
-#log-list {
+#log-list, #chatbot-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-#log-list li {
+#log-list li, #chatbot-list li {
     background-color: #3E3A36;
     margin-bottom: 0.6em;
     padding: 0.8em 1em;
