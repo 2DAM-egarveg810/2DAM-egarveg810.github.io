@@ -5,20 +5,25 @@ audio.play().catch(e => {
 });*/
 
 let playing = false;
-/*  
-function submitAction(){
+
+function reproduce_music(){
     //alert('cagada de manual');
     
-    let wasplaying = localStorage.getItem('playingSong');
+    let wasplaying = localStorage.getItem('is_song_playing');
 
     if (wasplaying === null){
         playing = false;
     }else{
-        playing = wasplaying;
+        if (wasplaying === "true"){
+            playing = true;
+        }
+        else{
+            playing = false;
+        }
     }
 }
 
-window.addEventListener('load', submitAction);*/
+//window.addEventListener('load', reproduce_music);
 
 function cambiaIcono(){
     if (!playing){
@@ -27,7 +32,7 @@ function cambiaIcono(){
         document.getElementById('playaudio').src = "img/pause-button.png";
     }
 
-    //localStorage.setItem('playingSong', playing);
+    //localStorage.setItem('is_song_playing', (playing) ? "true" : "false");
 }
 
 document.getElementById('playaudio').addEventListener('mouseover', () => {
