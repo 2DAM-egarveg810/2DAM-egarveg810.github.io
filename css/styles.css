@@ -542,8 +542,7 @@ footer {
 
 
 
-
-.nosotros {
+.nosotros, .fidelidad {
     max-width: 1000px;
     margin: 3em auto;
     padding: 2em;
@@ -554,7 +553,7 @@ footer {
     animation: shadowPulse 4s ease-in-out infinite;
 }
 
-.nosotros h2 {
+.nosotros h2, .fidelidad h2 {
     font-size: 2em;
     margin-bottom: 1em;
     border-bottom: 2px solid #D4B483;
@@ -562,7 +561,7 @@ footer {
     color: #D4B483;
 }
 
-.nosotros p {
+.nosotros p, .fidelidad p {
     font-size: 1.2em;
     line-height: 1.6em;
     margin-bottom: 2em;
