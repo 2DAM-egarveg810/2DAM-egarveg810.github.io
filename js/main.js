@@ -112,6 +112,21 @@ btnCarrito.addEventListener("click", () => {
     abrirCarrito();
 });
 
+function loadcarrito(){
+    //alert('cagada de manual');
+    
+    let carritocargado = localStorage.getItem('carrito');
+
+    if (carritocargado == null){
+        carrito = {};
+    }else{
+        carrito = JSON.parse(carritocargado);
+    }
+    actualizarCarrito();
+}
+
+window.addEventListener('load', loadcarrito);
+
 function actualizarCarrito() {
     listaCarrito.innerHTML = "";
 
@@ -130,7 +145,7 @@ function actualizarCarrito() {
         listaCarrito.appendChild(li);
     }
 
-    localStorage.setItem('carrito', carrito);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 
     totalCarrito.textContent = total.toFixed(2);
 }
