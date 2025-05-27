@@ -5,6 +5,20 @@ audio.play().catch(e => {
 });*/
 
 let playing = false;
+/*  
+function submitAction(){
+    //alert('cagada de manual');
+    
+    let wasplaying = localStorage.getItem('playingSong');
+
+    if (wasplaying === null){
+        playing = false;
+    }else{
+        playing = wasplaying;
+    }
+}
+
+window.addEventListener('load', submitAction);*/
 
 function cambiaIcono(){
     if (!playing){
@@ -12,11 +26,12 @@ function cambiaIcono(){
     }else{
         document.getElementById('playaudio').src = "img/pause-button.png";
     }
+
+    //localStorage.setItem('playingSong', playing);
 }
 
 document.getElementById('playaudio').addEventListener('mouseover', () => {
     cambiaIcono();
-   
 });
 
 document.getElementById('playaudio').addEventListener('mouseleave', () => {
@@ -28,6 +43,7 @@ document.getElementById('playaudio').addEventListener('click', () => {
     if (!playing){
         audio.play().catch(e => {
             alert("No se puede reproducir la musiquita de bakend", e);
+            playing = true;
         });
     }else{
         audio.pause();

@@ -130,6 +130,8 @@ function actualizarCarrito() {
         listaCarrito.appendChild(li);
     }
 
+    localStorage.setItem('carrito', carrito);
+
     totalCarrito.textContent = total.toFixed(2);
 }
 
