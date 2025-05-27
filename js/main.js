@@ -93,17 +93,20 @@ const totalCarrito = document.getElementById("total-carrito");
 const btnVaciar = document.getElementById("vaciar-carrito");
 const btnComprar = document.getElementById("comprar-carrito");
 const botonesAgregar = document.querySelectorAll(".boton-agregar");
+const logAviso = document.getElementById('log_aviso');
+//logAviso.style.top = "0%";
 
 
 function abrirCarrito() {
     carritoLateral.classList.toggle("abierto");
+    btnCarrito.classList.toggle("abierto");
 
     if (carritoLateral.classList.contains("abierto")) {
         btnCarrito.textContent = "✖";
-        btnCarrito.style.right = "320px"; // Se mueve hacia la izquierda del carrito
+        //btnCarrito.style.right = "320px"; // Se mueve hacia la izquierda del carrito
     } else {
         btnCarrito.textContent = "🛒";
-        btnCarrito.style.right = "20px"; // Vuelve a la esquina derecha
+        //btnCarrito.style.right = "20px"; // Vuelve a la esquina derecha
     }
 }
 
@@ -175,7 +178,8 @@ botonesAgregar.forEach((boton) => {
         }
 
         actualizarCarrito();
-        if (!carritoLateral.classList.contains("abierto")) {
+        //alert(window.innerWidth)
+        if (!carritoLateral.classList.contains("abierto") && window.innerWidth > 768) {
             abrirCarrito();
         }
     });
@@ -210,7 +214,9 @@ let secret = "";
 document.addEventListener("keydown", (e) => {
     secret += e.key.toLowerCase();
     if (secret.includes("galleta")) {
-        window.location.href = "https://orteil.dashnet.org/cookieclicker/";
+        let url = "https://orteil.dashnet.org/cookieclicker/";
+        //window.location.href = url;
+        window.open(url, '_blank').focus();
         secret = ""; // reset
     }
 });

@@ -11,155 +11,157 @@
 <body>
     <canvas id="matrix"></canvas>
     <audio id="hidden-audio" preload="auto" >
-      <source src="aud/enchanted sunset.mp3" type="audio/ogg">
-      Tu navegador no soporta audio HTML5.
+        <source src="aud/enchanted sunset.mp3" type="audio/ogg">
+        Tu navegador no soporta audio HTML5.
     </audio>
     <div class="contenedor">
     <header>
       
-      
         <div class="logo-container">
-    <img src="img/iconitofresh.png" alt="Logo de Bakend" class="logo" id="playaudio"/>
-    <h1>BAKEND</h1>
-  </div>
-      <div class="menu-toggle" id="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <nav>
-        <ul id="nav-menu">
-            <li><a href="" data-seccion="inicio" class="active">Inicio</a></li>
-            <li><a href="nosotros.html" data-seccion="nosotros">Nosotros</a></li>
-            <li><a href="fidelidad.html" data-seccion="fidelidad">Fidelidad</a></li>
-            <li><a href="crea-tarta.html" data-seccion="crea-tarta">Crea tu tarta</a></li>
-        </ul>
-      </nav>
+            <img src="img/iconitofresh.png" alt="Logo de Bakend" class="logo" id="playaudio"/>
+            <h1>BAKEND</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="" data-seccion="inicio" class="active">Inicio</a></li>
+                <li><a href="nosotros.html" data-seccion="nosotros">Nosotros</a></li>
+                <li><a href="fidelidad.html" data-seccion="fidelidad">Fidelidad</a></li>
+                <li><a href="crea-tarta.html" data-seccion="crea-tarta">Crea tu tarta</a></li>
+            </ul>
+        </nav>
     </header>
 
+    <!-- <ul style="padding: 0; margin: 0;">
+        <li id="log_aviso" style="position: fixed; width: 100%; z-index: 2000000;  list-style-type: none; top: 	50%;">Cliente: Marta - Compró 5 Tartas digitales en la tienda de Sevilla</li>
+    </ul> -->
+
     <section class="hero">
-      <h2>¡Todos nos sentamos en la tarta!</h2>
-      <p>Disfruta del sabor artesanal en cada mordisco.</p>
+        <h2>¡Todos nos sentamos en la tarta!</h2>
+        <p>Disfruta del sabor artesanal en cada mordisco.</p>
     </section>
 
     <section class="productos">
         <div class="tarjeta">
             <img src="img/pan.jpg" alt="Pan de código">
             <div class="contenido">
-              <h3>Pan de código</h3>
-              <p>Compilado con cariño, perfecto para desayunos debuggeados.</p>
-              <button class="boton-agregar" data-nombre="Pan de código" data-precio="19.99">Agregar al carrito</button>
+                <h3>Pan de código</h3>
+                <p>Compilado con cariño, perfecto para desayunos debuggeados.</p>
+                <button class="boton-agregar" data-nombre="Pan de código" data-precio="19.99">Agregar al carrito</button>
             </div>
           </div>
           
-          <div class="tarjeta">
-            <img src="img/croissant.jpg" alt="Croissant binario">
-            <div class="contenido">
-              <h3>Croissant binario</h3>
-              <p>1 mordisco, 0 remordimientos. Ideal para desarrolladores hambrientos.</p>
-              <button class="boton-agregar" data-nombre="Croissant binario" data-precio="14.99">Agregar al carrito</button>
-            </div>
+        <div class="tarjeta">
+          <img src="img/croissant.jpg" alt="Croissant binario">
+          <div class="contenido">
+            <h3>Croissant binario</h3>
+            <p>1 mordisco, 0 remordimientos. Ideal para desarrolladores hambrientos.</p>
+            <button class="boton-agregar" data-nombre="Croissant binario" data-precio="14.99">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/tarta.jpg" alt="Tarta digital">
-            <div class="contenido">
-              <h3>Tarta digital</h3>
-              <p>Pixeladamente deliciosa, renderizada con chocolate.</p>
-              <button class="boton-agregar" data-nombre="Tarta digital" data-precio="24.99">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/tarta.jpg" alt="Tarta digital">
+          <div class="contenido">
+            <h3>Tarta digital</h3>
+            <p>Pixeladamente deliciosa, renderizada con chocolate.</p>
+            <button class="boton-agregar" data-nombre="Tarta digital" data-precio="24.99">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/bollo.jpg" alt="Bollo de bits">
-            <div class="contenido">
-              <h3>Bollo de bits</h3>
-              <p>Relleno de dulzura binaria. ¡No te lo bytes!</p>
-              <button class="boton-agregar" data-nombre="Bollo de bits" data-precio="9.99">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/bollo.jpg" alt="Bollo de bits">
+          <div class="contenido">
+            <h3>Bollo de bits</h3>
+            <p>Relleno de dulzura binaria. ¡No te lo bytes!</p>
+            <button class="boton-agregar" data-nombre="Bollo de bits" data-precio="9.99">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/nube.jpg" alt="Bizcocho en la nube">
-            <div class="contenido">
-              <h3>Bizcocho en la nube</h3>
-              <p>Subido a la nube para mayor esponjosidad.</p>
-              <button class="boton-agregar" data-nombre="Bizcocho en la nube" data-precio="21.50">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/nube.jpg" alt="Bizcocho en la nube">
+          <div class="contenido">
+            <h3>Bizcocho en la nube</h3>
+            <p>Subido a la nube para mayor esponjosidad.</p>
+            <button class="boton-agregar" data-nombre="Bizcocho en la nube" data-precio="21.50">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/napolitana.jpg" alt="Napolitana cacheada">
-            <div class="contenido">
-              <h3>Napolitana cacheada</h3>
-              <p>Siempre disponible, incluso offline. Rellena de rendimiento.</p>
-              <button class="boton-agregar" data-nombre="Napolitana cacheada" data-precio="17.49">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/napolitana.jpg" alt="Napolitana cacheada">
+          <div class="contenido">
+            <h3>Napolitana cacheada</h3>
+            <p>Siempre disponible, incluso offline. Rellena de rendimiento.</p>
+            <button class="boton-agregar" data-nombre="Napolitana cacheada" data-precio="17.49">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/Baguette_algoritmo.jpg" alt="Baguette de algoritmo">
-            <div class="contenido">
-              <h3>Baguette de algoritmo</h3>
-              <p>Deliciosamente optimizada para cualquier paladar.</p>
-              <button class="boton-agregar" data-nombre="Baguette de algoritmo" data-precio="15.99">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/Baguette_algoritmo.jpg" alt="Baguette de algoritmo">
+          <div class="contenido">
+            <h3>Baguette de algoritmo</h3>
+            <p>Deliciosamente optimizada para cualquier paladar.</p>
+            <button class="boton-agregar" data-nombre="Baguette de algoritmo" data-precio="15.99">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/Rosquilla_bytes.jpg" alt="Rosquilla de bytes">
-            <div class="contenido">
-              <h3>Rosquilla de bytes</h3>
-              <p>Redonda como un loop infinito. Crujiente por fuera, suave por dentro.</p>
-              <button class="boton-agregar" data-nombre="Rosquilla de bytes" data-precio="11.99">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/Rosquilla_bytes.jpg" alt="Rosquilla de bytes">
+          <div class="contenido">
+            <h3>Rosquilla de bytes</h3>
+            <p>Redonda como un loop infinito. Crujiente por fuera, suave por dentro.</p>
+            <button class="boton-agregar" data-nombre="Rosquilla de bytes" data-precio="11.99">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/Galleta_firewall.jpg" alt="Galleta firewall">
-            <div class="contenido">
-              <h3>Galleta firewall</h3>
-              <p>Protege tu apetito de ataques de hambre inesperados.</p>
-              <button class="boton-agregar" data-nombre="Galleta firewall" data-precio="8.49">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/Galleta_firewall.jpg" alt="Galleta firewall">
+          <div class="contenido">
+            <h3>Galleta firewall</h3>
+            <p>Protege tu apetito de ataques de hambre inesperados.</p>
+            <button class="boton-agregar" data-nombre="Galleta firewall" data-precio="8.49">Agregar al carrito</button>
           </div>
-          
-          <div class="tarjeta">
-            <img src="img/Pan-integral-cifrado.jpg" alt="Pan integral cifrado">
-            <div class="contenido">
-              <h3>Pan integral cifrado</h3>
-              <p>Solo puedes saborearlo con la clave correcta. 100% seguro y sabroso.</p>
-              <button class="boton-agregar" data-nombre="Pan integral cifrado" data-precio="18.75">Agregar al carrito</button>
-            </div>
+        </div>
+        
+        <div class="tarjeta">
+          <img src="img/Pan-integral-cifrado.jpg" alt="Pan integral cifrado">
+          <div class="contenido">
+            <h3>Pan integral cifrado</h3>
+            <p>Solo puedes saborearlo con la clave correcta. 100% seguro y sabroso.</p>
+            <button class="boton-agregar" data-nombre="Pan integral cifrado" data-precio="18.75">Agregar al carrito</button>
           </div>
-          
+        </div>
     </section>
 
     <section class="log-compras">
         <h2>Últimas compras</h2>
         <div class="log-container">
-          <ul id="log-list"></ul>
+            <ul id="log-list"></ul>
         </div>
-      </section>
+    </section>
       
 
 
-<aside id="carrito-lateral" class="carrito-lateral">
-  <ul id="lista-carrito"></ul>
-  <div>Total: $<span id="total-carrito">0.00</span></div>
-  <button id="vaciar-carrito">Vaciar carrito</button>
-  <br>
-  <button id="comprar-carrito">Comprar</button>
-</aside>
-<button id="btn-carrito" class="abrir-carrito-btn">🛒</button>
-      
+    <aside id="carrito-lateral" class="carrito-lateral">
+      <ul id="lista-carrito"></ul>
+      <div>Total: $<span id="total-carrito">0.00</span></div>
+      <button id="vaciar-carrito">Vaciar carrito</button>
+      <br>
+      <button id="comprar-carrito">Comprar</button>
+    </aside>
+    <button id="btn-carrito" class="abrir-carrito-btn">🛒</button>
+        
 
-  <footer>
-    <p>&copy; 2025 Bakend. Todos los derechos reservados.</p>
-  </footer>
+    <footer>
+      <p>&copy; 2025 Bakend. Todos los derechos reservados.</p>
+    </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/fondo.js"></script>
-  <script src="js/audio.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/fondo.js"></script>
+    <script src="js/audio.js"></script>
 </body>
 </html>

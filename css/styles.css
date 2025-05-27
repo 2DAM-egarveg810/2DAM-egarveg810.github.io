@@ -69,7 +69,6 @@ nav a {
     font-weight: 600;
     transition: color 0.3s ease;
     font-size: 1em;
-
 }
 
 nav a:hover {
@@ -282,7 +281,7 @@ nav a.active {
     margin: 0;
 }
 
-#log-list li, #chatbot-list li {
+#log-list li, #log_aviso, #chatbot-list li {
     background-color: #3E3A36;
     margin-bottom: 0.6em;
     padding: 0.8em 1em;
@@ -326,6 +325,16 @@ footer {
     transform: translateX(0);
 }
 
+.abrir-carrito-btn.abierto{
+    right: 330px;
+}
+
+@media (max-width: 768px) {
+    .abrir-carrito-btn.abierto{
+        right: 75%;
+        /*left: 50px;*/
+    }
+}
 
 .abrir-carrito-btn {
     position: fixed;
@@ -342,6 +351,7 @@ footer {
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease, background-color 0.3s ease;
     transition: right 0.3s ease, background-color 0.3s ease;
 }
 
