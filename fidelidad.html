@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="img/iconitofresh.png">
   
 </head>
-<body>
+<body id="fidelidad">
     <canvas id="matrix"></canvas>
     <audio id="hidden-audio" preload="auto" >
       <source src="aud/enchanted sunset.mp3" type="audio/ogg">
@@ -39,26 +39,80 @@
 
     <section class="hero">
       <h2 style="text-align: center;">Puntos de fidelidad</h2>
-      <p>Ahora mismo, tienes <strong id="punto_fidelidad" style="font-size: 24px;">Bakend</strong> puntos de fidelidad</p>
+      <h3>Por cada 6 euros, recibe un punto de fidelidad!</h3>
+      <p>Ahora mismo, tienes <strong id="punto_fidelidad" style="font-size: 24px;">Error</strong> puntos de fidelidad</p>
+      <p>Has gastado <strong id="gasta_punto_fidelidad" style="font-size: 24px;">Error</strong> puntos de fidelidad</p>
+      <p>Rango del usuario <strong id="rango"></strong></p>
+    </section>
+
+    <section class="productos">
+        <div class="tarjeta">
+            <div class="contenido">
+                <h3>Combo "Debug Breakfast" (Pan de código + café)</h3>
+                <p>Para empezar el día como un verdadero desarrollador.</p>
+                <button class="boton-agregar" data-nombre="Combo 'Debug Breakfast'" data-precio="4">4 puntos de fidelidad</button>
+            </div>
+        </div>
+
+        <div class="tarjeta">
+            <div class="contenido">
+                <h3>Croissant binario + bebida energética</h3>
+                <p>Ideal para los devs en modo crunch.</p>
+                <button class="boton-agregar" data-nombre="Croissant + bebida" data-precio="2">2 puntos de fidelidad</button>
+            </div>
+        </div>
+
+        <div class="tarjeta">
+            <div class="contenido">
+                <h3>Taza "Pan integral cifrado" (con clave de acceso)</h3>
+                <p>Taza con diseño geek y algún juego de cifrado divertido.</p>
+                <button class="boton-agregar" data-nombre="Taza Pan cifrado" data-precio="6">6 puntos de fidelidad</button>
+            </div>
+        </div>
+
+        <div class="tarjeta">
+            <div class="contenido">
+                <h3>Camiseta edición limitada "Keep Calm, I&#39;m an Engineer"</h3>
+                <p>Camiseta de edicion limitada especial de bakend</p>
+                <button class="boton-agregar" data-nombre="Camiseta enginneer" data-precio="5">5 puntos de fidelidad</button>
+            </div>
+        </div>
+
+        <div class="tarjeta">
+            <div class="contenido">
+                <h3>Stickers de bakend</h3>
+                <p>“¡No te lo bytes!”, “Subido a la nube” y más.</p>
+                <button class="boton-agregar" data-nombre="Stickers de bakend" data-precio="1">1 punto de fidelidad</button>
+            </div>
+        </div>
+
+        <div class="tarjeta">
+            <div class="contenido">
+                <h3>Mas en el futuro</h3>
+                <p>Mas puntos bonus en el futuro!</p>
+                <button class="boton-agregar" data-nombre="Nada" data-precio="-1" disabled>...</button>
+            </div>
+        </div>
     </section>
       
 
 
     <aside id="carrito-lateral" class="carrito-lateral">
-        <ul id="lista-carrito"></ul>
-        <div>Total: $<span id="total-carrito">0.00</span></div>
-        <button id="vaciar-carrito">Vaciar carrito</button>
-        <br>
-        <button id="comprar-carrito">Comprar</button>
+    <ul id="lista-carrito"></ul>
+    <div>Total: <span id="total-carrito">0.00</span></div>
+    <button id="vaciar-carrito">Vaciar carrito</button>
+    <br>
+    <button id="comprar-carrito">Comprar</button>
     </aside>
+    <button id="btn-carrito" class="abrir-carrito-btn">🛒</button>
       
 
   <footer>
     <p>&copy; 2025 Bakend. Todos los derechos reservados.</p>
   </footer>
-
+  <script src="js/fidelidad.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/fondo.js"></script>
   <script src="js/audio.js"></script>
-  <script src="js/fidelidad.js"></script>
 </body>
 </html>

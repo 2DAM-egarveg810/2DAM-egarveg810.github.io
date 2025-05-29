@@ -416,6 +416,11 @@ footer {
     color: #D4B483;
     min-width: 55px;
     text-align: right;
+    transition: ease-in-out 0.3s;
+}
+#lista-carrito span#quititem:hover {
+    transform: scaleY(1.3) scaleX(1.3);
+    color: #F5E8C7;
 }
 
 .total-carrito {
@@ -469,6 +474,13 @@ footer {
     box-shadow: 0 6px 14px rgba(212, 180, 131, 0.9);
     transform: scale(1.05);
     color: #2E2B27;
+}
+
+
+.boton-agregar:disabled:hover{
+    transform: scale(1.00);
+    background-color: #A67C52;
+    box-shadow: 0 4px 10px rgba(166, 124, 82, 0.6);
 }
 
 .boton-agregar:active {

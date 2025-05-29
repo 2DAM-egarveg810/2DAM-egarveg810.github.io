@@ -3,6 +3,8 @@ document.getElementById("menu-toggle").addEventListener("click", () => {
   document.getElementById("nav-menu").classList.toggle("active");
 });
 
+let fidelidad_mode = document.body.id.includes('fidelidad');
+
 const nombres = [
     'Ana', 'Luis', 'Marta', 'Pedro', 'Laura',
     'Carlos', 'Paula', 'Jorge', 'Lucía', 'Iván',
@@ -73,9 +75,11 @@ function agregarEntradaAlLog() {
     const entrada = generarEntrada();
     const li = document.createElement("li");
     li.textContent = entrada;
-    logList.appendChild(li);
-    // Scroll automático hacia abajo
-    logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
+    if (logList !== null){
+        logList.appendChild(li);
+        // Scroll automático hacia abajo
+        logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
+    }
 }
 
 // Genera algunas entradas iniciales
@@ -117,18 +121,32 @@ btnCarrito.addEventListener("click", () => {
 
 function loadcarrito(){
     //alert('cagada de manual');
-    
-    let carritocargado = localStorage.getItem('carrito');
-
-    if (carritocargado == null){
+    if (fidelidad_mode){
         carrito = {};
     }else{
-        carrito = JSON.parse(carritocargado);
+        let carritocargado = localStorage.getItem('carrito');
+
+        if (carritocargado == null){
+            carrito = {};
+        }else{
+            carrito = JSON.parse(carritocargado);
+        }
     }
     actualizarCarrito();
 }
 
 window.addEventListener('load', loadcarrito);
+
+function quita_uno(item){
+    let nom = item.attributes["itemname"];
+    carrito[nom].cantidad -= 1;
+    if (carrito[nom].cantidad <= 0){
+        delete carrito[nom];
+    }
+    actualizarCarrito();
+    /*const nombre = boton.getAttribute("data-nombre");
+    const precio = parseFloat(boton.getAttribute("data-precio"));*/
+}
 
 function actualizarCarrito() {
     listaCarrito.innerHTML = "";
@@ -142,13 +160,27 @@ function actualizarCarrito() {
         li.textContent = `${item.nombre} x${item.cantidad}`;
 
         const precioSpan = document.createElement("span");
-        precioSpan.textContent = `$${(item.precio * item.cantidad).toFixed(2)}`;
+        if (fidelidad_mode){
+            precioSpan.textContent = `${(item.precio * item.cantidad).toString()}pt`;
+        }else{
+            precioSpan.textContent = `$${(item.precio * item.cantidad).toFixed(2)}`;
+        }
+        const cierra = document.createElement('span');
+        cierra.textContent = '✖';
+        cierra.attributes["itemname"] = key;
+        cierra.id = "quititem";
+        cierra.addEventListener('click', (item) => {
+            quita_uno(item.target);
+        });
 
         li.appendChild(precioSpan);
+        li.appendChild(cierra);
         listaCarrito.appendChild(li);
     }
 
-    localStorage.setItem('carrito', JSON.stringify(carrito));
+    if (!fidelidad_mode){
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
 
     totalCarrito.textContent = total.toFixed(2);
 }
@@ -191,13 +223,48 @@ btnVaciar.addEventListener("click", () => {
 });
 
 btnComprar.addEventListener("click", () => {
+    let precio_final = 0;
     for (const [key, value] of Object.entries(carrito)) {
         let entrada = `Cliente: Compraste ${value.cantidad} ${value.nombre} en tu casa`;
         const li = document.createElement("li");
         li.textContent = entrada;
-        logList.appendChild(li);
-        // Scroll automático hacia abajo
-        logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
+        if (logList !== null){
+            logList.appendChild(li);
+            // Scroll automático hacia abajo
+            logList.parentElement.scrollTop = logList.parentElement.scrollHeight;
+        }
+        precio_final += value.cantidad * value.precio;
+    }
+    
+    // Actualiza los puntos de fidelidad
+    if (fidelidad_mode){
+        // Hace cositas
+        let puntos_fidelidad = parseInt(localStorage.getItem('puntos_fidelidad'));
+        if (puntos_fidelidad === null || puntos_fidelidad < precio_final){
+            alert('Error: No tienes los suficientes puntos de fidelidad.');
+        }else{
+            localStorage.setItem('puntos_fidelidad', (puntos_fidelidad - precio_final).toString());
+            let puntos_gastados = parseInt(localStorage.getItem('puntos_fidelidad_gastados'));
+            if (puntos_gastados === null || isNaN(puntos_gastados)){
+                localStorage.setItem('puntos_fidelidad_gastados', puntos_fidelidad.toString())
+            }else{
+                localStorage.setItem('puntos_fidelidad_gastados', (puntos_fidelidad+puntos_gastados).toString())
+            }
+            document.location.reload();
+        }
+    }else{
+        // Añade puntos de fidelidad
+        let puntos_obtenidos = Math.trunc(precio_final / 6);
+        let puntos_fidelidad = parseInt(localStorage.getItem('puntos_fidelidad'));
+        
+    
+        if (puntos_fidelidad === null){
+            puntos_fidelidad = puntos_obtenidos;
+        }else{
+            puntos_fidelidad = puntos_fidelidad + puntos_obtenidos;
+        }
+    
+        localStorage.setItem('puntos_fidelidad', puntos_fidelidad.toString());
     }
 
     carrito = {};
