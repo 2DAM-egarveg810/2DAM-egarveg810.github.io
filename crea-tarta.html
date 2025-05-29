@@ -43,35 +43,32 @@
     </section>
       
     <section class="ZangHuaShi" style="margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-      <div class="equipo">
-        <div id="imaginfinal" style="flex: 1 1 30%; background-color: #4A423D; margin: auto;">
-          <img src="img/egarveg.png">
-        </div>
-        <div style="flex: 1 1 30%; background-color: #4A423D;">
-          <label style="display: block; margin-top: 10px; font-weight: bold;">Sabor del Sistema Operativo (Base): </label>
-          <select id="forma">
-            <option value="chocolate">Chocolate de alto rendimiento</option>
-            <option value="vainilla">Vainilla compilada con amor</option>
-            <option value="cafe">Tarta de café multitarea</option>
-            <option value="limon">Bizcocho de limón optimizado</option>
-          </select>
-          <br>
-          <label style="display: block; margin-top: 10px; font-weight: bold;">Tamaño de la tarta: </label>
-          <select id="tamaño">
-            <option value="mini">Pequeña</option>
-            <option value="media">Mediana</option>
-            <option value="grande">Grande</option>
-          </select>
-          <br>
-          <label style="display: block; margin-top: 10px; font-weight: bold;">Decoraciones:</label>
-          <div class="checkbox-group">
-            <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="1" class="decoracion" /> Chips de chocolate</label>
-            <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="1" class="decoracion" /> Topping de bits de galleta</label>
-            <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="1.5" class="decoracion" /> Glaseado RGB</label>
-            <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="2" class="decoracion" /> Figuritas dev (teclado, ratón)</label>
-          </div>      
-        </div>
+      <label style="display: block; margin-top: 10px; font-weight: bold;">Sabor del Sistema Operativo (Base): </label>
+      <select id="forma">
+        <option value="chocolate" data-precio="3.00">Chocolate de alto rendimiento</option>
+        <option value="vainilla" data-precio="2.00">Vainilla compilada con amor</option>
+        <option value="cafe" data-precio="2.00">Tarta de café multitarea</option>
+        <option value="limon" data-precio="1.00">Bizcocho de limón optimizado</option>
+      </select>
+      <br>
+      <label style="display: block; margin-top: 10px; font-weight: bold;">Tamaño de la tarta: </label>
+      <select id="tamaño">
+        <option value="mini" data-precio="7.99">Pequeña</option>
+        <option value="media" data-precio="14.99">Mediana</option>
+        <option value="grande" data-precio="22.99">Grande</option>
+      </select>
+      <br>
+      <label style="display: block; margin-top: 10px; font-weight: bold;">Decoraciones:</label>
+      <div class="checkbox-group">
+        <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="1" class="decoracion" data-precio="3.99" /> Chips de chocolate</label>
+        <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="2" class="decoracion" data-precio="1.99" /> Topping de bits de galleta</label>
+        <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="3" class="decoracion" data-precio="2.99" /> Glaseado RGB</label>
+        <label style="display: block; margin-top: 10px; font-weight: bold;"><input type="checkbox" value="4" class="decoracion" data-precio="3.99" /> Figuritas dev (teclado, ratón)</label>
       </div>
+      <br>
+      <br>
+      <p>Total: <strong class="total">nose</strong></p>
+      <button class="boton-agregar" id="finalizar_creacion_tarta">🍰 Confirmar Pedido</button>
       
     </section>
 
@@ -87,7 +84,7 @@
   <footer>
     <p>&copy; 2025 Bakend. Todos los derechos reservados.</p>
   </footer>
-
+  <script src="js/crear_tarta.js"></script>
   <script src="js/fondo.js"></script>
   <script src="js/audio.js"></script>
 </body>
