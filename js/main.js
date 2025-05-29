@@ -250,6 +250,7 @@ btnComprar.addEventListener("click", () => {
             }else{
                 localStorage.setItem('puntos_fidelidad_gastados', (puntos_fidelidad+puntos_gastados).toString())
             }
+            window.scrollTo(0,0);
             document.location.reload();
         }
     }else{
