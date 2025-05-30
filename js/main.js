@@ -2,7 +2,7 @@
 document.getElementById("menu-toggle").addEventListener("click", () => {
   document.getElementById("nav-menu").classList.toggle("active");
 });
-
+// Dice si estamos en la página de fidelidad
 let fidelidad_mode = document.body.id.includes('fidelidad');
 
 const nombres = [
@@ -98,7 +98,6 @@ const btnVaciar = document.getElementById("vaciar-carrito");
 const btnComprar = document.getElementById("comprar-carrito");
 const botonesAgregar = document.querySelectorAll(".boton-agregar");
 const logAviso = document.getElementById('log_aviso');
-//logAviso.style.top = "0%";
 
 
 function abrirCarrito() {
@@ -107,10 +106,8 @@ function abrirCarrito() {
 
     if (carritoLateral.classList.contains("abierto")) {
         btnCarrito.textContent = "✖";
-        //btnCarrito.style.right = "320px"; // Se mueve hacia la izquierda del carrito
     } else {
         btnCarrito.textContent = "🛒";
-        //btnCarrito.style.right = "20px"; // Vuelve a la esquina derecha
     }
 }
 
@@ -120,7 +117,6 @@ btnCarrito.addEventListener("click", () => {
 });
 
 function loadcarrito(){
-    //alert('cagada de manual');
     if (fidelidad_mode){
         carrito = {};
     }else{
@@ -137,15 +133,14 @@ function loadcarrito(){
 
 window.addEventListener('load', loadcarrito);
 
-function quita_uno(item){
+
+function quita_elemento(item){
     let nom = item.attributes["itemname"];
     carrito[nom].cantidad -= 1;
     if (carrito[nom].cantidad <= 0){
         delete carrito[nom];
     }
     actualizarCarrito();
-    /*const nombre = boton.getAttribute("data-nombre");
-    const precio = parseFloat(boton.getAttribute("data-precio"));*/
 }
 
 function actualizarCarrito() {
@@ -170,7 +165,7 @@ function actualizarCarrito() {
         cierra.attributes["itemname"] = key;
         cierra.id = "quititem";
         cierra.addEventListener('click', (item) => {
-            quita_uno(item.target);
+            quita_elemento(item.target);
         });
 
         li.appendChild(precioSpan);

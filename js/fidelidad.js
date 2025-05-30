@@ -1,3 +1,4 @@
+// Cambia los puntos de la página. Podria meterse en main
 function enseniar_puntos(){
     let fidelidad = document.getElementById('punto_fidelidad');
     let gasta_fidelidad = document.getElementById('gasta_punto_fidelidad');
