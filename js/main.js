@@ -117,7 +117,7 @@ btnCarrito.addEventListener("click", () => {
 });
 
 function loadcarrito(){
-    let cargaado = false
+    let cargaado = false;
     if (fidelidad_mode){
         carrito = {};
     }else{
@@ -138,9 +138,10 @@ function loadcarrito(){
 
 window.addEventListener('load', loadcarrito);
 
-function create_aud_endpoint(file_src){
+function create_aud_endpoint(file_src, volume=1){
    let audend = document.createElement("audio");
    audend.src = file_src;
+   audend.volume = volume;
    audend.addEventListener("ended", (ev) => {
         document.body.removeChild(ev.target);
    });
@@ -193,7 +194,11 @@ function actualizarCarrito() {
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }
 
-    totalCarrito.textContent = total.toFixed(2);
+    if (fidelidad_mode){
+        totalCarrito.textContent = total + " puntos de fidelidad";
+    }else{
+        totalCarrito.textContent = total.toFixed(2);
+    }
 }
 
 let cookieClick = 0;
@@ -214,7 +219,7 @@ botonesAgregar.forEach((boton) => {
             if (cookieClick === 20) {
                 boton.textContent = "Cookie Clicker";
                 document.title = "Cookie Clicker";
-                create_aud_endpoint("aud/cookie_crunch.mp3");
+                create_aud_endpoint("aud/cookie_crunch.mp3", 1);
             }
             if (cookieClick === 50) {
                 boton.textContent = "Se viene sindrome del tunel carpiano";
@@ -281,6 +286,9 @@ btnComprar.addEventListener("click", () => {
 
     carrito = {};
     actualizarCarrito();
+    if (window.innerWidth <= 768) {
+        abrirCarrito();
+    }
 });
 
 function toggleCarrito() {
