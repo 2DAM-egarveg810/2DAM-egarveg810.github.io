@@ -117,6 +117,7 @@ btnCarrito.addEventListener("click", () => {
 });
 
 function loadcarrito(){
+    let cargaado = false
     if (fidelidad_mode){
         carrito = {};
     }else{
@@ -126,13 +127,26 @@ function loadcarrito(){
             carrito = {};
         }else{
             carrito = JSON.parse(carritocargado);
+            cargaado = true;
         }
     }
     actualizarCarrito();
+    if (cargaado){
+        abrirCarrito()
+    }
 }
 
 window.addEventListener('load', loadcarrito);
 
+function create_aud_endpoint(file_src){
+   let audend = document.createElement("audio");
+   audend.src = file_src;
+   audend.addEventListener("ended", (ev) => {
+        document.body.removeChild(ev.target);
+   });
+   audend.play();
+   document.body.appendChild(audend);
+}
 
 function quita_elemento(item){
     let nom = item.attributes["itemname"];
@@ -173,7 +187,9 @@ function actualizarCarrito() {
         listaCarrito.appendChild(li);
     }
 
-    if (!fidelidad_mode){
+    if (Object.keys(carrito).length === 0){
+        localStorage.removeItem('carrito');
+    } else if (!fidelidad_mode){
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }
 
@@ -187,7 +203,7 @@ botonesAgregar.forEach((boton) => {
         const nombre = boton.getAttribute("data-nombre");
         const precio = parseFloat(boton.getAttribute("data-precio"));
 
-        if (carrito[nombre]) {
+        if (carrito[nombre] != null) {
             carrito[nombre].cantidad += 1;
         } else {
             carrito[nombre] = { nombre, precio, cantidad: 1 };
@@ -198,6 +214,7 @@ botonesAgregar.forEach((boton) => {
             if (cookieClick === 20) {
                 boton.textContent = "Cookie Clicker";
                 document.title = "Cookie Clicker";
+                create_aud_endpoint("aud/cookie_crunch.mp3");
             }
             if (cookieClick === 50) {
                 boton.textContent = "Se viene sindrome del tunel carpiano";
@@ -205,7 +222,7 @@ botonesAgregar.forEach((boton) => {
         }
 
         actualizarCarrito();
-        //alert(window.innerWidth)
+        // Open on mobile automaticaly
         if (!carritoLateral.classList.contains("abierto") && window.innerWidth > 768) {
             abrirCarrito();
         }
@@ -235,7 +252,7 @@ btnComprar.addEventListener("click", () => {
     if (fidelidad_mode){
         // Hace cositas
         let puntos_fidelidad = parseInt(localStorage.getItem('puntos_fidelidad'));
-        if (puntos_fidelidad === null || puntos_fidelidad < precio_final){
+        if ((puntos_fidelidad === null || isNaN(puntos_fidelidad)) || puntos_fidelidad < precio_final){
             alert('Error: No tienes los suficientes puntos de fidelidad.');
         }else{
             localStorage.setItem('puntos_fidelidad', (puntos_fidelidad - precio_final).toString());
@@ -252,9 +269,8 @@ btnComprar.addEventListener("click", () => {
         // Añade puntos de fidelidad
         let puntos_obtenidos = Math.trunc(precio_final / 6);
         let puntos_fidelidad = parseInt(localStorage.getItem('puntos_fidelidad'));
-        
     
-        if (puntos_fidelidad === null){
+        if (puntos_fidelidad === null || isNaN(puntos_fidelidad)){
             puntos_fidelidad = puntos_obtenidos;
         }else{
             puntos_fidelidad = puntos_fidelidad + puntos_obtenidos;

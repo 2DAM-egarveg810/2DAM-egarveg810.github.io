@@ -1,29 +1,28 @@
-/*const audio = document.getElementById('hidden-audio');
-alert('me reproduzco');
-audio.play().catch(e => {
-    console.log("El navegador bloqueó la reproducción automática:", e);
-});*/
-
 let playing = false;
+let saved_time;
 
-function reproduce_music(){
-    //alert('cagada de manual');
-    
-    let wasplaying = localStorage.getItem('is_song_playing');
+const songURL = "aud/enchanted sunset.mp3";
+const audioEndpoint = document.getElementById('hidden-audio');
 
-    if (wasplaying === null){
+function loadPlayState() {
+    const savedTime = parseFloat(sessionStorage.getItem('song_current_time'));
+    if (savedTime === null || isNaN(savedTime)){
+        saved_time = 0;
         playing = false;
     }else{
-        if (wasplaying === "true"){
-            playing = true;
-        }
-        else{
-            playing = false;
-        }
+        saved_time = savedTime;
+        playing = true;
     }
 }
 
-//window.addEventListener('load', reproduce_music);
+// Save current play state and position
+function savePlayState() {
+    if (playing) {
+        sessionStorage.setItem('song_current_time', audioEndpoint.currentTime.toString());
+    }else{
+        sessionStorage.removeItem("song_current_time");
+    }
+}
 
 function cambiaIcono(){
     if (!playing){
@@ -31,8 +30,6 @@ function cambiaIcono(){
     }else{
         document.getElementById('playaudio').src = "img/pause-button.png";
     }
-
-    //localStorage.setItem('is_song_playing', (playing) ? "true" : "false");
 }
 
 document.getElementById('playaudio').addEventListener('mouseover', () => {
@@ -44,16 +41,41 @@ document.getElementById('playaudio').addEventListener('mouseleave', () => {
 });
 
 document.getElementById('playaudio').addEventListener('click', () => {
-    const audio = document.getElementById('hidden-audio');
     if (!playing){
-        audio.play().catch(e => {
+        audioEndpoint.play().catch(e => {
             alert("No se puede reproducir la musiquita de bakend", e);
             playing = true;
         });
     }else{
-        audio.pause();
-        audio.currentTime = 0;
+        audioEndpoint.pause();
+        audioEndpoint.currentTime = 0;
     }
     playing = !playing;
     cambiaIcono();
 });
+
+window.addEventListener('load', async () => {
+    loadPlayState();
+
+    if (saved_time != 0){
+        audioEndpoint.currentTime = saved_time;
+        audioEndpoint.setAttribute("autoplay", "");
+        // Para que google no se queje
+        document.addEventListener("click", function click_s() {
+            playing = true;
+            audioEndpoint.play().catch(err =>{
+                console.log("Autoplay failed: " + err);
+                playing = false;
+            });
+            document.removeEventListener("click", click_s);
+       });
+    }
+});
+audioEndpoint.addEventListener("timeupdate", () => {
+    savePlayState()
+});
+
+/*
+window.onbeforeunload = savePlayState;
+window.addEventListener("beforeunload", savePlayState);
+*/
