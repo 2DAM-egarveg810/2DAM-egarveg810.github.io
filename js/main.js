@@ -1,3 +1,5 @@
+import { create_aud_endpoint } from "./utils.js";
+
 // Menú hamburguesa
 document.getElementById("menu-toggle").addEventListener("click", () => {
   document.getElementById("nav-menu").classList.toggle("active");
@@ -137,17 +139,6 @@ function loadcarrito(){
 }
 
 window.addEventListener('load', loadcarrito);
-
-function create_aud_endpoint(file_src, volume=1){
-   let audend = document.createElement("audio");
-   audend.src = file_src;
-   audend.volume = volume;
-   audend.addEventListener("ended", (ev) => {
-        document.body.removeChild(ev.target);
-   });
-   audend.play();
-   document.body.appendChild(audend);
-}
 
 function quita_elemento(item){
     let nom = item.attributes["itemname"];
@@ -301,6 +292,7 @@ let secret = "";
 document.addEventListener("keydown", (e) => {
     secret += e.key.toLowerCase();
     if (secret.includes("galleta")) {
+        create_aud_endpoint("aud/cookie_crunch.mp3", 1);
         let url = "https://orteil.dashnet.org/cookieclicker/";
         //window.location.href = url;
         window.open(url, '_blank').focus();
