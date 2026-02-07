@@ -84,6 +84,10 @@ class GitCommitHelper:
             self.staged_files = []
             self.unstaged_files = []
             self.current_branch = "main"
+       
+        if self.scope_combo.cget("state") == "readonly":
+            suggested = self.suggest_scope_from_files()
+            self.scope_var.set(suggested)
 
     def update_status_display(self):
         for widget in self.status_frame.winfo_children():
@@ -286,26 +290,25 @@ class GitCommitHelper:
             font=("Segoe UI", 9)
         ).pack(side=tk.TOP, pady=(0, 8))
 
-        tk.Button(btn_frame, text="COMMIT + PUSH", command=self.execute_full_flow,
-                 bg="#0288d1", fg="white", font=("Segoe UI", 11, "bold"),
-                 padx=25, pady=10, relief="flat", cursor="hand2", width=18).pack(side=tk.LEFT, padx=8)
+        button_row = tk.Frame(btn_frame)
+        button_row.pack()
 
-        tk.Button(btn_frame, text="Refresh estado", command=self.refresh_git_status,
+        tk.Button(button_row, text="COMMIT + PUSH", command=self.execute_full_flow,
+                 bg="#0288d1", fg="white", font=("Segoe UI", 10, "bold"),
+                 padx=15, pady=8, relief="flat", cursor="hand2", width=16).pack(side=tk.LEFT, padx=5)
+
+        tk.Button(button_row, text="SOLO COMMIT", command=self.execute_commit_only,
+                 bg="#388e3c", fg="white", font=("Segoe UI", 10, "bold"),
+                 padx=15, pady=8, relief="flat", cursor="hand2", width=16).pack(side=tk.LEFT, padx=5)
+
+        tk.Button(button_row, text="Refresh estado", command=self.refresh_git_status,
                  bg="#6c757d", fg="white", font=("Segoe UI", 9),
-                 padx=15, pady=7, relief="flat").pack(side=tk.LEFT, padx=8)
+                 padx=12, pady=6, relief="flat").pack(side=tk.LEFT, padx=5)
 
-        tk.Button(btn_frame, text="Cancelar", command=self.root.quit,
+        tk.Button(button_row, text="Cancelar", command=self.root.quit,
                  bg="#d32f2f", fg="white", font=("Segoe UI", 10),
-                 padx=20, pady=7, relief="flat").pack(side=tk.RIGHT, padx=8)
-
-        self.status_var = tk.StringVar(value="")
-        tk.Label(main_frame, textvariable=self.status_var, fg="#d32f2f",
-                font=("Segoe UI", 9, "bold"), wraplength=700).grid(row=6, column=0, columnspan=4, pady=5)
-
-        tk.Label(main_frame,
-                text="Ambitos: Usa predefinidos o crea uno personalizado con 'Editar' | Formato: tipo(ambito): asunto",
-                fg="#546e7a", font=("Segoe UI", 8, "italic")).grid(row=7, column=0, columnspan=4, pady=(10, 0))
-
+                 padx=15, pady=6, relief="flat").pack(side=tk.RIGHT, padx=5)
+             
     def on_scope_selected(self, event=None):
         selected = self.scope_var.get()
         if selected == "Personalizar...":
@@ -316,6 +319,27 @@ class GitCommitHelper:
         self.scope_combo.config(state="normal")
         self.scope_combo.focus()
         self.scope_combo.selection_range(0, tk.END)
+        
+    def suggest_scope_from_files(self):
+        """Sugiere un ámbito basado en las rutas de los archivos staged."""
+        if not self.staged_files:
+            return "tasks"  # valor por defecto
+
+        # Contador de scopes probables
+        scope_votes = {scope: 0 for scope in PREDEFINED_SCOPES}
+        
+        for file_path in self.staged_files:
+            path_lower = file_path.lower()
+            for scope in PREDEFINED_SCOPES:
+                if scope in path_lower:
+                    scope_votes[scope] += 1
+
+        # Elegir el scope con más votos
+        best_scope = max(scope_votes, key=scope_votes.get)
+        if scope_votes[best_scope] > 0:
+            return best_scope
+        else:
+            return "tasks"  # fallback
 
     def update_counter(self, *args):
         count = len(self.subject_var.get())
@@ -430,7 +454,87 @@ class GitCommitHelper:
         except Exception as e:
             messagebox.showerror("Error inesperado",
                 f"Tipo: {type(e).__name__}\nMensaje: {str(e)}")
+                
+    def execute_commit_only(self):
+        """Ejecuta solo el commit, sin push."""
+        if not self.staged_files:
+            if not self.unstaged_files:
+                messagebox.showwarning("Advertencia", "No hay cambios en el repositorio")
+                return
 
+            if not messagebox.askyesno("Sin cambios staged",
+                "No hay archivos staged para commit.\n\n"
+                "Stagear TODOS los cambios sin stagear y continuar?"):
+                return
+
+            self.stage_all_changes()
+            if not self.staged_files:
+                return
+
+        if not self.type_var.get():
+            self.status_var.set("Error: Selecciona un tipo de commit")
+            return
+
+        scope = self.scope_var.get().strip()
+        if not scope:
+            self.status_var.set("Error: El ambito no puede estar vacio")
+            return
+
+        if any(c in scope for c in "():"):
+            self.status_var.set("Error: Ambito invalido: no puede contener '(', ')' o ':'")
+            return
+
+        subject = self.subject_var.get().strip()
+        if not subject:
+            self.status_var.set("Error: El asunto no puede estar vacio")
+            return
+        if len(subject) > MAX_SUBJECT:
+            if not messagebox.askyesno("Advertencia",
+                f"El asunto excede {MAX_SUBJECT} caracteres ({len(subject)}).\n"
+                "Forzar commit? (no recomendado para estandares)"):
+                return
+
+        commit_type = self.type_var.get().split(" - ")[0]
+        summary = f"{commit_type}({scope}): {subject[:50]}{'...' if len(subject)>50 else ''}"
+
+        if not messagebox.askyesno("Confirmar commit local",
+            f"Se ejecutara:\n"
+            f"git commit -m \"{summary}\"\n\n"
+            "Continuar?"):
+            return
+
+        try:
+            body = self.body_text.get("1.0", tk.END).strip()
+            footer = self.footer_var.get().strip()
+            lines = [f"{commit_type}({scope}): {subject}", ""]
+            if body: lines.extend([body, ""])
+            if footer: lines.append(footer)
+            commit_msg = "\n".join(lines)
+
+            commit_result = subprocess.run(
+                ["git", "commit", "-m", commit_msg],
+                capture_output=True, text=True, cwd=self.repo_path, timeout=15, encoding="utf-8"
+            )
+
+            if commit_result.returncode != 0:
+                self.handle_git_error(commit_result, "commit")
+                return
+
+            commit_hash = subprocess.run(
+                ["git", "rev-parse", "--short", "HEAD"],
+                capture_output=True, text=True, cwd=self.repo_path, timeout=5, encoding="utf-8"
+            ).stdout.strip()
+
+            messagebox.showinfo("Exito",
+                f"Commit creado localmente: {commit_hash}\n\n"
+                f"Mensaje: {summary}")
+            self.root.quit()
+
+        except subprocess.TimeoutExpired:
+            messagebox.showerror("Timeout", "El commit tardo demasiado.")
+        except Exception as e:
+            messagebox.showerror("Error inesperado",
+                f"Tipo: {type(e).__name__}\nMensaje: {str(e)}")
     def handle_git_error(self, result, operation):
         stderr = result.stderr.strip()
         stdout = result.stdout.strip()
