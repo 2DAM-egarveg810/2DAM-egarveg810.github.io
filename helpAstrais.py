@@ -20,16 +20,16 @@ COMMIT_TYPES = [
     ("style", "💄 Estilo"),
     ("revert", "⏪ Reversión")
 ]
-SCOPES = ["auth", "tasks", "groups", "economy", "shop", "achievements", 
-          "avatar", "pet", "minigames", "calendar", "android", "web", 
-          "backend", "db", "docker", "other"]
+PREDEFINED_SCOPES = ["auth", "tasks", "groups", "economy", "shop", "achievements", 
+                     "avatar", "pet", "minigames", "calendar", "android", "web", 
+                     "backend", "db", "docker"]
 MAX_SUBJECT = 72
 
 class GitCommitHelper:
     def __init__(self, root):
         self.root = root
         self.root.title("✨ Astraïs Git Helper: add → commit → push")
-        self.root.geometry("780x680")
+        self.root.geometry("800x700")
         self.root.resizable(False, False)
         self.repo_path = Path.cwd()
         self.validate_git_env()
@@ -211,12 +211,35 @@ class GitCommitHelper:
         type_combo.grid(row=0, column=1, columnspan=2, sticky="w", pady=5)
         type_combo.current(0)
         
-        # Ámbito
+        # Ámbito (AHORA EDITABLE + botón personalizado)
         tk.Label(main_frame, text="Ámbito:", font=("Segoe UI", 10, "bold")).grid(row=1, column=0, sticky="w", pady=5)
+        
+        # Frame para ámbito + botón "Personalizar"
+        scope_frame = tk.Frame(main_frame)
+        scope_frame.grid(row=1, column=1, columnspan=2, sticky="w", pady=5)
+        
         self.scope_var = tk.StringVar(value="tasks")
-        scope_combo = ttk.Combobox(main_frame, textvariable=self.scope_var, 
-                                  values=SCOPES, state="readonly", width=22)
-        scope_combo.grid(row=1, column=1, sticky="w", pady=5)
+        self.scope_combo = ttk.Combobox(
+            scope_frame, 
+            textvariable=self.scope_var, 
+            values=PREDEFINED_SCOPES + ["✚ Personalizar..."], 
+            state="readonly",  # Empezamos en readonly para elegir predefinidos
+            width=22
+        )
+        self.scope_combo.pack(side=tk.LEFT)
+        self.scope_combo.bind("<<ComboboxSelected>>", self.on_scope_selected)
+        
+        # Botón para modo edición directa
+        tk.Button(
+            scope_frame, 
+            text="✏️", 
+            command=self.enable_custom_scope,
+            bg="#e0e0e0", 
+            width=3,
+            relief="flat",
+            cursor="hand2",
+            font=("Segoe UI", 9)
+        ).pack(side=tk.LEFT, padx=(5, 0))
         
         # Asunto
         tk.Label(main_frame, text=f"Asunto (≤{MAX_SUBJECT} chars):", 
@@ -266,8 +289,21 @@ class GitCommitHelper:
         
         # Footer informativo
         tk.Label(main_frame, 
-                text="💡 Flujo: 1) Stagea cambios → 2) Completa commit → 3) ¡Commit + Push automático!",
+                text="💡 Ámbitos: Usa predefinidos o crea uno personalizado con ✏️ | Formato: tipo(ámbito): asunto",
                 fg="#546e7a", font=("Segoe UI", 8, "italic")).grid(row=7, column=0, columnspan=4, pady=(10,0))
+    
+    def on_scope_selected(self, event=None):
+        """Maneja selección en combobox de ámbito"""
+        selected = self.scope_var.get()
+        if selected == "✚ Personalizar...":
+            self.enable_custom_scope()
+            self.scope_var.set("")  # Limpiar para edición
+    
+    def enable_custom_scope(self):
+        """Habilita modo edición para ámbito personalizado"""
+        self.scope_combo.config(state="normal")
+        self.scope_combo.focus()
+        self.scope_combo.selection_range(0, tk.END)
     
     def update_counter(self, *args):
         count = len(self.subject_var.get())
@@ -294,9 +330,19 @@ class GitCommitHelper:
         if not self.type_var.get():
             self.status_var.set("❌ Selecciona un tipo de commit")
             return
-        if not self.scope_var.get():
-            self.status_var.set("❌ Selecciona un ámbito")
+        
+        # Validar ámbito (ahora puede ser personalizado)
+        scope = self.scope_var.get().strip()
+        if not scope:
+            self.status_var.set("❌ El ámbito no puede estar vacío")
             return
+        
+        # Validar caracteres inválidos en ámbito (rompen formato conventional commits)
+        if any(c in scope for c in "():"):
+            self.status_var.set("❌ Ámbito inválido: no puede contener '(', ')' o ':'")
+            return
+        
+        # Validar asunto
         subject = self.subject_var.get().strip()
         if not subject:
             self.status_var.set("❌ El asunto no puede estar vacío")
@@ -309,7 +355,6 @@ class GitCommitHelper:
         
         # Confirmación final
         commit_type = self.type_var.get().split(" - ")[0]
-        scope = self.scope_var.get().strip()
         summary = f"{commit_type}({scope}): {subject[:50]}{'...' if len(subject)>50 else ''}"
         
         if not messagebox.askyesno("✅ Confirmar operación", 
@@ -416,7 +461,7 @@ if __name__ == "__main__":
             print("  • Windows: Reinstala Python y marca 'tcl/tk and IDLE' en el instalador")
             print("\nAlternativa rápida (terminal):")
             print("  git add .")
-            print('  git commit -m "feat(auth): ejemplo"')
+            print('  git commit -m "feat(mi-ambito-personalizado): ejemplo"')
             print("  git push")
         else:
             raise
